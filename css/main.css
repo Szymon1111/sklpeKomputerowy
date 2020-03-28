@@ -1,0 +1,14 @@
+.front-page-content{
+    width:100%;
+    text-align: center;
+
+    margin-top: 10vh;
+
+    display: flex;
+    justify-content: center;
+}
+.front-page-content-header{
+    width: 50%;
+    padding-bottom: 5vh;
+    border-bottom: 2px solid #32CD32;
+}
