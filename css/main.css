@@ -8,7 +8,23 @@
     justify-content: center;
 }
 .front-page-content-header{
-    width: 50%;
     padding-bottom: 5vh;
     border-bottom: 2px solid #32CD32;
+}
+
+
+.color-green{
+    color:#32CD32;
+}
+.flex-center-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.flex-center-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

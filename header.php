@@ -8,9 +8,10 @@
     <title>Sklep komputerowy LW</title>
 
     <!-- STYLES LINK -->
-    <link rel="stylesheet" href="css/main.css?6">
-    <link rel="stylesheet" href="css/form.css?2">
-    <link rel="stylesheet" href="css/header.css?3">
+    <link rel="stylesheet" href="css/main.css?10">
+    <link rel="stylesheet" href="css/form.css?10">
+    <link rel="stylesheet" href="css/header.css?10">
+    <link rel="stylesheet" href="css/userPanel.css?11">
 
     <!-- FONTS LINK -->
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
@@ -77,6 +78,32 @@
                 return $answer[0];
         }
 
+        function showUserOrders($userLogin,$db_connection){
+            $que = 'SELECT Id_zamowienia,status,cena FROM zamowienia WHERE Login_uzytkownika="'.$userLogin.'"';
+
+            if($userLogin == '')
+                echo 'Login uzytkownika nie moze byc rowny NULL';
+
+            $answer = $db_connection->query($que);
+            $orders_number = $answer -> num_rows;
+
+            if($orders_number == 0)
+                echo 'Nie masz zamówień';
+            else{
+                echo'
+                <div class="single-order flex-center-row">
+                    <div class="order-id">Numer</div>
+                    <div class="order-status">Status</div>
+                    <div class="order-price">Cena</div>
+                </div>';
+                for($i = $orders_number;$i > 0;$i--){
+                    $toShow = $answer->fetch_array();
+                    echo '<div class="single-order flex-center-row"><div class="order-id">'.$toShow[0].'</div><div class="order-status">'.$toShow[1].'</div><div class="order-price">'.$toShow[2].'</div></div>';
+                }
+            }
+
+        }
+
         // Login script
         if(isset($_POST['submit'])){
             $login = $_POST['login'];
@@ -105,36 +132,40 @@
                     is_log();
                 }
                 else{
-                    echo 'Niepoprawne dane logowania !!!';
+                    ?>
+                    <script type="text/javascript">let incorrectPassword = true;</script>
+                    <?php
                 }
             }
         }
 ?>
     <section class="log-form-section">
 
-    <form action="" method="POST" class="log-form">
+        <div class="login-failed-alert"></div>
 
-        <input type="text" name='login' placeholder="LOGIN / E-MAIL">
-        <input type="password" name='password' placeholder="HASŁO">
+        <form action="" method="POST" class="log-form">
 
-        <button type="submit" name="submit">zaloguj</button>
+            <input type="text" name='login' placeholder="LOGIN / E-MAIL" id="login-field">
+            <input type="password" name='password' placeholder="HASŁO">
 
-    </form>
+            <button type="submit" name="submit">zaloguj</button>
+
+        </form>
 
     </section>
 
     <div class="content">
-        <header class="page-header">
+        <header class="page-header flex-center-row">
 
             <h1>sklep komputerowy</h1>
 
-            <nav class="main-menu">
+            <nav class="main-menu flex-center-row">
 
                 <a href="index.php"><div class="main-menu-element">home</div></a>
                 <a href="shop.php"><div class="main-menu-element">sklep</div></a>
                 <a href="contact.php"><div class="main-menu-element">kontakt</div></a>
 
-                <section class="menu-log-section">
+                <section class="menu-log-section flex-center-column">
                     <img src="img/user.png" alt="LOG" class="log-img">
                     <div class="log-status" style="color:#32CD32;">zalogowany</div>
                 </section>

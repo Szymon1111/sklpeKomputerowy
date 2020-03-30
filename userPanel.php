@@ -1,21 +1,25 @@
 <?php include('header.php'); ?>
 
-    <div class="user-panel">
+<div class="user-panel flex-center-column">
 
-        <h1>Witaj User !</h1>
+    <h1>Witaj <span
+            class="color-green"><?php echo getUserData($_SESSION['login'],'uzytkownik','imie',$db_connection); ?></span>
+        !</h1>
 
-        <div class="orders">
+    <div class="orders flex-center-column">
 
-            nie masz zamówień
+        <h2 class="orders-header">Twoje zamówienia</h2>
 
-        </div>
+        <?php showUserOrders($_SESSION['login'],$db_connection); ?>
 
-        <!-- logout script -->
-        <form action="" method="POST">
-            <button type="submit" name="logout">wyloguj</button>
-        </form>
+    </div>
 
-        <?php
+    <!-- logout script -->
+    <form action="" method="POST">
+        <button type="submit" name="logout" class='logout-btn'>wyloguj</button>
+    </form>
+
+    <?php
         
             if(isset($_POST['logout'])){
                 session_destroy();
@@ -24,6 +28,6 @@
         
         ?>
 
-    </div>
+</div>
 
 <?php include('footer.php'); ?>

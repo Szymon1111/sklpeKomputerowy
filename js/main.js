@@ -12,11 +12,7 @@ function logSection(){
 
     logScreenActivator.addEventListener('click',function(){
         if(logStatus.innerHTML == 'zaloguj'){
-            content.style.filter = 'blur(3px)';
-
-            logScreen.style.visibility = 'visible';
-            logScreen.style.opacity = '1';
-            isOpen = true;
+            showLoginSection();
         }
         else
             window.location = 'userPanel.php';
@@ -33,6 +29,14 @@ function logSection(){
         }
     };
 
+    if(incorrectPassword){
+
+        showLoginSection();
+        document.querySelector('.login-failed-alert').innerHTML = 'Niepoprawne dane logowania';
+
+    }
+        
+
     function logSectionClose(){
         if(isOpen){
             content.style.filter = 'blur(0)';
@@ -45,5 +49,14 @@ function logSection(){
             isOpen = false;
         }
     }
+    function showLoginSection(){
+        content.style.filter = 'blur(3px)';
+
+            logScreen.style.visibility = 'visible';
+            logScreen.style.opacity = '1';
+            isOpen = true;
+    }
+
+    console.log('logSection done');
 }
 logSection();
