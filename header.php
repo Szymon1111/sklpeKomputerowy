@@ -9,7 +9,7 @@
 
     <!-- STYLES LINK -->
     <link rel="stylesheet" href="css/main.css?10">
-    <link rel="stylesheet" href="css/form.css?10">
+    <link rel="stylesheet" href="css/form.css?11">
     <link rel="stylesheet" href="css/header.css?10">
     <link rel="stylesheet" href="css/userPanel.css?11">
 
@@ -20,6 +20,12 @@
 </head>
 
 <body>
+
+    <script>
+
+        let incorrectPassword = false;
+
+    </script>
 
     <?php 
         // Setup database connection
@@ -32,77 +38,8 @@
         if(@$_SESSION['is_log'] == true){}
         else $_SESSION['is_log'] = false;
 
-        // This function set the login panel look 
-        function is_log(){ 
-            global $db_connection;
-
-            if($_SESSION['is_log']){
-                if(@$_SESSION['is_admin'])
-                    $foo = getUserData($_SESSION['login'],'pracownik','imie',$db_connection).' '.getUserData($_SESSION['login'],'pracownik','nazwisko',$db_connection).' [A]';
-                else
-                    $foo = getUserData($_SESSION['login'],'uzytkownik','imie',$db_connection).' '.getUserData($_SESSION['login'],'uzytkownik','nazwisko',$db_connection);
-            ?>
-                <script type='text/javascript'>
-                    logStatus.innerHTML = "<?php echo $foo ?>";
-                    logStatus.style.color = '#32CD32';
-                </script>
-
-            <?php
-                }
-                else{
-            ?>
-                <script type='text/javascript'>
-                    logStatus.innerHTML = 'zaloguj';
-                    logStatus.style.color = 'black';
-                </script>
-            <?php
-            }
-        }
-
-        function logOut(){
-
-        }
-
-        function getUserData($userLogin,$from,$what,$db_connection){
-            $que = 'SELECT '.$what.' FROM '.$from.' WHERE login = "'.$userLogin.'"';
-
-            if($userLogin == '')
-                echo 'Login uzytkownika nie moze byc rowny NULL';
-
-            $answer = $db_connection->query($que);
-            $answer = $answer->fetch_array();
-
-            if($what == '*')
-                return $answer;
-            else
-                return $answer[0];
-        }
-
-        function showUserOrders($userLogin,$db_connection){
-            $que = 'SELECT Id_zamowienia,status,cena FROM zamowienia WHERE Login_uzytkownika="'.$userLogin.'"';
-
-            if($userLogin == '')
-                echo 'Login uzytkownika nie moze byc rowny NULL';
-
-            $answer = $db_connection->query($que);
-            $orders_number = $answer -> num_rows;
-
-            if($orders_number == 0)
-                echo 'Nie masz zamówień';
-            else{
-                echo'
-                <div class="single-order flex-center-row">
-                    <div class="order-id">Numer</div>
-                    <div class="order-status">Status</div>
-                    <div class="order-price">Cena</div>
-                </div>';
-                for($i = $orders_number;$i > 0;$i--){
-                    $toShow = $answer->fetch_array();
-                    echo '<div class="single-order flex-center-row"><div class="order-id">'.$toShow[0].'</div><div class="order-status">'.$toShow[1].'</div><div class="order-price">'.$toShow[2].'</div></div>';
-                }
-            }
-
-        }
+        //Include file with all useful functions
+        include('phpSrc/functions.php');
 
         // Login script
         if(isset($_POST['submit'])){
@@ -118,6 +55,9 @@
                 $_SESSION['login'] = $login;
 
                 is_log();
+                ?>
+                <script>sessionStorage.setItem('isAdmin','false');</script>
+                <?php
             }
             else{
                 $check_user_db_question = 'SELECT * FROM pracownik WHERE login = "'.$login.'" AND haslo = "'.$password.'"';
@@ -130,10 +70,13 @@
                     $_SESSION['is_admin'] = true;
 
                     is_log();
+                    ?>
+                    <script>sessionStorage.setItem('isAdmin','true');</script>
+                    <?php
                 }
                 else{
                     ?>
-                    <script type="text/javascript">let incorrectPassword = true;</script>
+                    <script type="text/javascript">incorrectPassword = true;</script>
                     <?php
                 }
             }

@@ -8,14 +8,18 @@ function logSection(){
 
     let isOpen = false;
 
-    console.log(logStatus.innerHTML);
-
     logScreenActivator.addEventListener('click',function(){
         if(logStatus.innerHTML == 'zaloguj'){
             showLoginSection();
         }
-        else
-            window.location = 'userPanel.php';
+        else{
+            if(sessionStorage.getItem('isAdmin') == 'true'){
+                window.location = 'adminPanel.php';
+            }
+            else{
+                window.location = 'userPanel.php';
+            }
+        }
     });
 
     // logClose.addEventListener('click',function(){
