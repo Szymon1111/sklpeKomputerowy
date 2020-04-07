@@ -8,10 +8,11 @@
     <title>Sklep komputerowy LW</title>
 
     <!-- STYLES LINK -->
-    <link rel="stylesheet" href="css/main.css?10">
-    <link rel="stylesheet" href="css/form.css?11">
-    <link rel="stylesheet" href="css/header.css?10">
-    <link rel="stylesheet" href="css/userPanel.css?11">
+    <link rel="stylesheet" href="css/main.css?14">
+    <link rel="stylesheet" href="css/form.css?14">
+    <link rel="stylesheet" href="css/header.css?14">
+    <link rel="stylesheet" href="css/userPanel.css?14">
+    <link rel="stylesheet" href="css/register.css?14">
 
     <!-- FONTS LINK -->
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
@@ -84,17 +85,20 @@
 ?>
     <section class="log-form-section">
 
-        <div class="login-failed-alert"></div>
+        <div class="login-failed-alert">Niepoprawne dane logowania</div>
 
         <form action="" method="POST" class="log-form">
 
-            <input type="text" name='login' placeholder="LOGIN / E-MAIL" id="login-field">
-            <input type="password" name='password' placeholder="HASŁO">
+            <input type="text" name='login' placeholder="login / e-mail" id="login-field">
+            <input type="password" name='password' placeholder="hasło">
 
             <button type="submit" name="submit">zaloguj</button>
 
+            <a href="register.php" class="create-account">utwórz konto</a>
+
         </form>
 
+        
     </section>
 
     <div class="content">

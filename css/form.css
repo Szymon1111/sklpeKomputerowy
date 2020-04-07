@@ -5,21 +5,34 @@ form{
     flex-direction: column;
 }
 input{
-    width:300px;
+    width:250px;
     height: 25px;
-    padding: 10px;
-    padding-bottom: 3px;
+    padding: 20px 10px;
+    padding-bottom: 15px;
 
-    margin: 7px;
+    margin: 10px;
     
     font-family: 'Righteous', cursive;
-    font-size: 20px;
-    text-align: center;
+    font-size: 15px;
+    /* text-align: center; */
 
     border:none;
     border-bottom: 2px solid #32CD32;
 
+    box-sizing: border-box;
+
+    background-color: transparent;
+
     transition: background-color .5s;
+}
+input.medium{
+    width:200px
+}
+input.short{
+    width: 125px;
+}
+input.shorter{
+    width: 100px;
 }
 input:focus{
     outline: none;
@@ -30,6 +43,9 @@ input:active{
 }
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+input.fill{
+    text-align: center;
 }
 button{
     padding: 7px 20px;

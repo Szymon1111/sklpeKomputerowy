@@ -36,7 +36,7 @@ function logSection(){
     if(incorrectPassword){
 
         showLoginSection();
-        document.querySelector('.login-failed-alert').innerHTML = 'Niepoprawne dane logowania';
+        document.querySelector('.login-failed-alert').style.opacity = '1';
 
     }
         
@@ -51,6 +51,7 @@ function logSection(){
             },1000);
     
             isOpen = false;
+            incorrectPassword = false;
         }
     }
     function showLoginSection(){
@@ -64,3 +65,19 @@ function logSection(){
     console.log('logSection done');
 }
 logSection();
+
+function inputFillDetect(){
+    let input = document.getElementsByTagName('input');
+    
+    for(let i = 0; i < input.length;i++){
+        input[i].addEventListener('input',function(){
+            if(input[i].value != ''){
+                input[i].classList.add('fill');
+            }
+            else{
+                input[i].classList.remove('fill');
+            }
+        });
+    }
+}
+inputFillDetect();
