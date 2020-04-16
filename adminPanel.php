@@ -11,9 +11,10 @@
         </span>
         !
     </h1>
-
+        
 </div>
 
+<?php include('phpSrc/uploadImage.php'); ?>
 <?php include('phpSrc/logoutBtn.php'); ?>
 
 

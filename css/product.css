@@ -1,0 +1,14 @@
+.product-container{
+    margin:auto;
+    margin-top:5vh;
+}
+.product-title{
+    font-size: 50px;
+}
+.product-price{
+    font-size: 40px;
+    font-weight: normal;
+}
+.product-description{
+    font-size: 16px;
+}

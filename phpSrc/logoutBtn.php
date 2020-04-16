@@ -9,8 +9,8 @@
             session_destroy();
             ?>
             <script>sessionStorage.clear();</script>
+            <script>location.href='index.php';</script>");
             <?php
-            header("Location: index.php");
         }
     
     ?>

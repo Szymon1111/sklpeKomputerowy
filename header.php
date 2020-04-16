@@ -1,3 +1,12 @@
+<?php 
+// Setup session
+session_start();
+// Setup database connection
+$db_connection = mysqli_connect('localhost','root','','shop');
+// $db_connection = mysqli_connect('localhost','id13294886_shopusername','Trek session 7','id13294886_shop');
+$db_connection->query("SET CHARSET utf8");
+$db_connection->query("SET NAMES `utf8` COLLATE `utf8_polish_ci`"); 
+?>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -8,11 +17,12 @@
     <title>Sklep komputerowy LW</title>
 
     <!-- STYLES LINK -->
-    <link rel="stylesheet" href="css/main.css?14">
-    <link rel="stylesheet" href="css/form.css?14">
+    <link rel="stylesheet" href="css/main.css?15">
+    <link rel="stylesheet" href="css/form.css?15">
     <link rel="stylesheet" href="css/header.css?14">
     <link rel="stylesheet" href="css/userPanel.css?14">
-    <link rel="stylesheet" href="css/register.css?14">
+    <link rel="stylesheet" href="css/register.css?15">
+    <link rel="stylesheet" href="css/product.css?15">
 
     <!-- FONTS LINK -->
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
@@ -29,13 +39,6 @@
     </script>
 
     <?php 
-        // Setup database connection
-        // $db_connection = mysqli_connect('sql304.epizy.com','epiz_25413168','Du3OTBCyHxmn','epiz_25413168_shop');
-        $db_connection = mysqli_connect('localhost','root','','shop');
-        
-        // Setup session
-        session_start();
-
         if(@$_SESSION['is_log'] == true){}
         else $_SESSION['is_log'] = false;
 
@@ -43,17 +46,17 @@
         include('phpSrc/functions.php');
 
         // Login script
-        if(isset($_POST['submit'])){
+        if(isset($_POST['login-button'])){
             $login = $_POST['login'];
             $password = $_POST['password'];
 
-            $check_user_db_question = 'SELECT * FROM uzytkownik WHERE login = "'.$login.'" AND haslo = "'.$password.'"';
-
+            $check_user_db_question = 'SELECT * FROM uzytkownik WHERE (login="'.$login.'" OR Email="'.$login.'") AND haslo="'.base64_encode($password).'"';
             $check_user = $db_connection->query($check_user_db_question);
         
             if($check_user -> num_rows > 0){
+                $setLogin = 'SELECT login FROM uzytkownik WHERE (login="'.$login.'" OR Email="'.$login.'")';
                 $_SESSION['is_log'] = true;
-                $_SESSION['login'] = $login;
+                $_SESSION['login'] = $db_connection->query($setLogin)->fetch_array()[0];
 
                 is_log();
                 ?>
@@ -92,7 +95,7 @@
             <input type="text" name='login' placeholder="login / e-mail" id="login-field">
             <input type="password" name='password' placeholder="hasło">
 
-            <button type="submit" name="submit">zaloguj</button>
+            <button type="submit" name="login-button">zaloguj</button>
 
             <a href="register.php" class="create-account">utwórz konto</a>
 
