@@ -95,38 +95,26 @@ function createProductMiniature($productId,$db_connection){
 
         echo '
         <div class="product-miniature">
-                <form action="product.php" method="GET" class="miniature-form">
-                    <button type="submit" name="goToProduct" value="'.$answer[0].'" class="miniature-title">'.$answer[1].'</button>
-                </form>
-                <span class="miniature-price">Cena '.$answer[2].'</span>
+                    <a href="product.php?productId='.$answer[0].'" class="miniature-title"><h2 class="miniature-title">'.$answer[1].'</h2></a>
+                <h3 class="miniature-price">Cena '.$answer[2].'</h3>
         </div>
         ';
     }
 
 }
 
-function getProductImages($productId){
+function showCategoriesList($db_connection){
+    echo '<select name="category" id="categories">';
 
-    $serverAddress = 'files.000webhost.com';
-    $conn_id = ftp_connect($serverAddress);
-    $login_result = ftp_login($conn_id, 'stronaserwerowe', 'Trek session 7');
+    $que = 'SELECT * FROM kategorie';
+    $answer = $db_connection -> query($que);
+    $rowsNumber = $answer -> num_rows;
 
-    $dir = $productId;
-
-    $list = ftp_nlist($conn_id,$dir);
-
-    for($i = 2;$i < sizeof($list); $i++){
-
-        $local_file = 'img/product/'.$list[$i];
-        $server_file = $dir.'/'.$list[$i];
-
-        if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)){}
-
+    for($i = 0; $i < $rowsNumber; $i++){
+        $ans = $answer->fetch_array();
+        echo '<option value="'.$ans[0].'">'.$ans[0].'</option>';
     }
-
-    // // close the connection
-    ftp_close($conn_id);
-    
-
+  
+    echo '</select>';
 }
 ?>

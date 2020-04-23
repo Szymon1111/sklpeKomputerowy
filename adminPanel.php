@@ -14,7 +14,7 @@
         
 </div>
 
-<?php include('phpSrc/uploadImage.php'); ?>
+<?php include('phpSrc/addProduct.php'); ?>
 <?php include('phpSrc/logoutBtn.php'); ?>
 
 

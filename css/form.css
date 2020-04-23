@@ -99,3 +99,13 @@ input[type="file"]{
     border:none;
     height: auto;
 }
+select{
+    border: none;
+    padding: 10px;
+
+    font-family: 'Righteous', cursive;
+    font-size: 15px;
+}
+select:focus{
+    outline: none;
+}

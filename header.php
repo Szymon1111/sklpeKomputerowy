@@ -18,11 +18,12 @@ $db_connection->query("SET NAMES `utf8` COLLATE `utf8_polish_ci`");
 
     <!-- STYLES LINK -->
     <link rel="stylesheet" href="css/main.css?15">
-    <link rel="stylesheet" href="css/form.css?15">
+    <link rel="stylesheet" href="css/form.css?16">
     <link rel="stylesheet" href="css/header.css?14">
     <link rel="stylesheet" href="css/userPanel.css?14">
     <link rel="stylesheet" href="css/register.css?15">
     <link rel="stylesheet" href="css/product.css?15">
+    <link rel="stylesheet" href="css/miniature.css?15">
 
     <!-- FONTS LINK -->
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
