@@ -15,7 +15,10 @@
         <div class="product-price"><?php echo $answer[2]; ?></div>
         <div class="product-description"><?php echo $answer[3]; ?></div>
 
-        <!-- <img src="<?php echo "http://stronaserwerowe.000webhostapp.com/".$productId."/1.png" ?>" alt=""> -->
+        <img src="<?php echo "http://stronaserweroweimg.000webhostapp.com/".$productId."/0.jpg" ?>" alt="">
+        <img src="<?php echo "http://stronaserweroweimg.000webhostapp.com/".$productId."/0.png" ?>" alt="">
+        <img src="<?php echo "http://stronaserweroweimg.000webhostapp.com/".$productId."/0.jpeg" ?>" alt="">
+        
     </div>
 
 <?php include('footer.php')?>

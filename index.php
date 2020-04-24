@@ -11,8 +11,7 @@
         <div class="random-products flex-center-row">
 
         <?php 
-            createProductMiniature(1,$db_connection);
-            createProductMiniature(2,$db_connection);
+            createProductMiniature(30,$db_connection);
         ?>
 
 
