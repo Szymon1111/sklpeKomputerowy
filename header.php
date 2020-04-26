@@ -17,13 +17,14 @@ $db_connection->query("SET NAMES `utf8` COLLATE `utf8_polish_ci`");
     <title>Sklep komputerowy LW</title>
 
     <!-- STYLES LINK -->
-    <link rel="stylesheet" href="css/main.css?15">
-    <link rel="stylesheet" href="css/form.css?16">
-    <link rel="stylesheet" href="css/header.css?14">
+    <link rel="stylesheet" href="css/main.css?17">
+    <link rel="stylesheet" href="css/form.css?17">
+    <link rel="stylesheet" href="css/header.css?19">
     <link rel="stylesheet" href="css/userPanel.css?14">
     <link rel="stylesheet" href="css/register.css?15">
     <link rel="stylesheet" href="css/product.css?15">
-    <link rel="stylesheet" href="css/miniature.css?15">
+    <link rel="stylesheet" href="css/miniature.css?17">
+    <link rel="stylesheet" href="css/search.css?19">
 
     <!-- FONTS LINK -->
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
@@ -34,9 +35,7 @@ $db_connection->query("SET NAMES `utf8` COLLATE `utf8_polish_ci`");
 <body>
 
     <script>
-
         let incorrectPassword = false;
-
     </script>
 
     <?php 
@@ -86,8 +85,34 @@ $db_connection->query("SET NAMES `utf8` COLLATE `utf8_polish_ci`");
                 }
             }
         }
+
+        //Searching script
+        if(isset($_POST['search'])){
+            $searching_category = $_POST['category'];
+            $searching_phrase = $_POST['search-input']; 
+            
+            if($searching_category == 'ALL')
+                $que = 'SELECT nazwa,id_produktu FROM produkty WHERE nazwa LIKE "%'.$searching_phrase.'%"';
+            else
+                $que = 'SELECT nazwa,id_produktu FROM produkty WHERE nazwa LIKE "%'.$searching_phrase.'%" AND kategoria="'.$searching_category.'"';
+
+            $res = $db_connection->query($que);
+            $numberOfSearches = $res->num_rows;
+
+            if($numberOfSearches > 0){
+                echo '<div class="search-results">';
+                for($i = 0;$i < $numberOfSearches; $i+=1){
+                    $single_product = $res->fetch_array();
+
+                    echo '<a href="product.php?productId='.$single_product[1].'"><div class="search-single-result">'.$single_product[0].'</div></a>';
+                }
+                echo '</div>';
+            }
+        }
 ?>
     <section class="log-form-section">
+
+    
 
         <div class="login-failed-alert">Niepoprawne dane logowania</div>
 
@@ -103,12 +128,46 @@ $db_connection->query("SET NAMES `utf8` COLLATE `utf8_polish_ci`");
         </form>
 
         
-    </section>
+    </section>  
+
+    <div class="search-icon">
+
+        <div class="search-cir"></div>
+        <div class="search-lin"></div>
+        
+    </div>
+
+    <div class="search-form-box">
+
+        <form action="" method="POST" class="search-form">
+
+            <span class="flex-center-row">
+
+                <input type="text" class="search-input" name="search-input">
+
+                <button type="submit" name="search" class="search-button">
+                    <img src="img/search.png" alt="" class="search-button-img">
+                </button>  
+
+            </span>
+
+            <?php showCategoriesList($db_connection); ?>
+            
+        </form>
+
+    </div>
 
     <div class="content">
         <header class="page-header flex-center-row">
 
             <h1>sklep komputerowy</h1>
+
+
+            
+
+            <div class="searchbox">
+                
+            </div>
 
             <nav class="main-menu flex-center-row">
 

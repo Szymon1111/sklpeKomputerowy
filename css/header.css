@@ -6,10 +6,15 @@ body{
     font-family: 'Righteous', cursive;
 }
 .content{
-    transition: filter .5s; 
+    transition: filter .5s, box-shadow .3s, transform .3s; 
 
     max-width: 1300px;
+    min-height: 100vh;
     margin:auto;
+}
+.content.minimalized{
+    box-shadow: 15px 15px 35px #eee;
+    transform: scale(.7) translateX(-30%);
 }
 .page-header{
 
@@ -36,7 +41,8 @@ body{
 
     margin: 20px;
     font-size: 30px;
-    transition: color .5s;
+
+    transition: .5s;
 
 }
 .main-menu-element:hover{
@@ -97,3 +103,4 @@ body{
     font-size: 14px;
     /* margin-top: 5px; */
 }
+

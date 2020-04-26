@@ -1,7 +1,12 @@
 .product-miniature{
     margin:25px;
+    width:380px;
+}
+.miniature-img{
+    width:80%;
 }
 .miniature-title{
+    font-size: 20px;
 }
 .miniature-price{
     font-weight: normal;

@@ -81,3 +81,49 @@ function inputFillDetect(){
     }
 }
 inputFillDetect();
+
+function searchMechanism(){
+    let searchIcon = document.querySelector('.search-icon');
+    let pageContent = document.querySelector('.content');
+
+    let searchCircle = document.querySelector('.search-cir');
+    let searchLine = document.querySelector('.search-lin');
+    let searchBox = document.querySelector('.search-form-box');
+    let searchResults = document.querySelector('.search-results');
+
+
+    searchIcon.addEventListener('click', () => {
+        pageContent.classList.toggle('minimalized');
+        searchCircle.classList.toggle('arrow');
+        searchLine.classList.toggle('arrow');
+        searchBox.classList.toggle('opened');
+
+        if(searchResults)
+            searchResults.classList.toggle('opened');
+
+        if(sessionStorage.getItem('isSearchOpen') == 'true'){
+            sessionStorage.setItem('isSearchOpen','false');
+        }
+        else{
+            sessionStorage.setItem('isSearchOpen','true');
+        }
+    })
+
+    if(sessionStorage.getItem('isSearchOpen') == 'true'){
+        pageContent.style.transition = 'null';
+
+        pageContent.classList.add('minimalized');
+        searchCircle.classList.add('arrow');
+        searchLine.classList.add('arrow');
+        searchBox.classList.add('opened');
+        
+        if(searchResults)
+            searchResults.classList.add('opened');
+
+        window.setTimeout(() => {
+            pageContent.style.transition = 'filter .5s, box-shadow .3s, transform .3s';
+        },500);
+        
+    }
+}
+searchMechanism();

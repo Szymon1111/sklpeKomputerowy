@@ -95,16 +95,20 @@ function createProductMiniature($productId,$db_connection){
 
         echo '
         <div class="product-miniature">
-                    <a href="product.php?productId='.$answer[0].'" class="miniature-title"><h2 class="miniature-title">'.$answer[1].'</h2></a>
-                <h3 class="miniature-price">Cena '.$answer[2].'</h3>
+            <img src="http://stronaserweroweimg.000webhostapp.com/'.$productId.'/0.jpg" alt="" class="miniature-img">
+            <a href="product.php?productId='.$answer[0].'" class="miniature-title"><h2 class="miniature-title">'. $answer[1] .'</h2></a>
+            <h3 class="miniature-price">Cena '. $answer[2] .'</h3>
         </div>
         ';
     }
+    else
+        echo "Nie ma produktu o id: ".$productId;
 
 }
 
 function showCategoriesList($db_connection){
     echo '<select name="category" id="categories">';
+    echo '<option value="ALL">Wszystkie kategorie</option>';
 
     $que = 'SELECT * FROM kategorie';
     $answer = $db_connection -> query($que);
@@ -116,5 +120,11 @@ function showCategoriesList($db_connection){
     }
   
     echo '</select>';
+}
+
+function createCategoryMiniature($db_connection){
+
+    // $que = 'SELECT '
+
 }
 ?>

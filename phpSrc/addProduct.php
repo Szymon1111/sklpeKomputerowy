@@ -33,7 +33,8 @@
 
         $countfiles = count($_FILES['file']['name']);
 
-        ftp_mkdir($conn_id, $product_id);
+
+        ftp_mkdir($conn_id, "public_html/".$product_id);
 
         for($i=0;$i<$countfiles;$i++){
             
@@ -42,7 +43,7 @@
             $path_parts = pathinfo($_FILES["file"]["name"][$i]);
             $extension = $path_parts['extension'];
 
-            $fileNameOnServer = $product_id."/".$i.".".$extension;
+            $fileNameOnServer = "public_html/".$product_id."/".$i.".".$extension;
 
             if (@ftp_put($conn_id, $fileNameOnServer, $localFile, FTP_BINARY)) {
                 

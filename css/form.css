@@ -6,9 +6,8 @@ form{
 }
 input{
     width:250px;
-    height: 25px;
     padding: 20px 10px;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 
     margin: 10px;
     
@@ -23,7 +22,7 @@ input{
 
     background-color: transparent;
 
-    transition: background-color .5s;
+    transition: background-color .5s, border-color .5s;
 }
 input.medium{
     width:200px
@@ -36,7 +35,8 @@ input.shorter{
 }
 input:focus{
     outline: none;
-    background-color: rgba(50, 205, 50,.1);
+    background-color: rgba(255,255,255,.7);
+    border-color: #325bcd;
 }
 input:active{
     background-color: transparent;
@@ -104,7 +104,7 @@ select{
     padding: 10px;
 
     font-family: 'Righteous', cursive;
-    font-size: 15px;
+    font-size: 18px;
 }
 select:focus{
     outline: none;
